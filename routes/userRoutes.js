@@ -35,27 +35,27 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
-const imgstorage = multer.memoryStorage();
+// const imgstorage = multer.memoryStorage();
 const incomingfileFilter = (req, file, cb) => {
   if (!file.originalname.match(/\.(csv)$/)) {
     return cb(new Error("Please upload a CSV file"), false);
   }
   cb(null, true);
 };
-const imageFilter = (req, file, cb) => {
-  const filetypes = /jpeg|jpg|png/;
-  const mimetype = filetypes.test(file.mimetype);
-  if (mimetype) {
-    return cb(null, true);
-  } else {
-    cb(new Error("Only images are allowed"), false);
-  }
-};
-const uploadimgfile = multer({
-  storage: imgstorage,
-  fileFilter: imageFilter,
-  limits: { fileSize: 2000000 },
-});
+// const imageFilter = (req, file, cb) => {
+//   const filetypes = /jpeg|jpg|png/;
+//   const mimetype = filetypes.test(file.mimetype);
+//   if (mimetype) {
+//     return cb(null, true);
+//   } else {
+//     cb(new Error("Only images are allowed"), false);
+//   }
+// };
+// const uploadimgfile = multer({
+//   storage: imgstorage,
+//   fileFilter: imageFilter,
+//   limits: { fileSize: 2000000 },
+// });
 const upload = multer({
   storage,
   fileFilter: incomingfileFilter,
